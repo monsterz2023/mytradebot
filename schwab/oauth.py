@@ -22,7 +22,7 @@ class OAuth:
         '''
         url = "https://api.schwabapi.com/v1/oauth/token"
         headers = {
-            "Authorization": f"Basic {{self.__auth_header()}}",
+            "Authorization": f"Basic {self.__auth_header()}",
             "Content-Type": "application/x-www-form-urlencoded",
         }
         data = {

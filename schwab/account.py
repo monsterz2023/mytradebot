@@ -101,6 +101,12 @@ class Account:
 
 class Accounts:
     @classmethod
+    def user_preferences(cls, token):
+        headers = {"Authorization": f"Bearer {token}"}
+        resp = requests.get(
+            f"{host}/trader/v1/userPreference", headers=headers)
+        return resp.json()
+    @classmethod
     def get_accounts(cls, token):
         headers = {"Authorization": f"Bearer {token}"}
         resp = requests.get(

@@ -3,6 +3,7 @@ import json
 from schwab.account import Accounts
 from schwab.oauth import OAuth
 from schwab import Config
+from schwab.price_history import PriceHistory
 from schwab.quote import Quotes
 
 config = Config.create_from_env()
@@ -21,7 +22,8 @@ oauth=OAuth(config.client_id, config.client_secret)
 # save the refresh token in system environment variable for later use, refresh token is valid for 7 days
 
 # step 3: get token from refresh token
-token=oauth.refresh_token(config.refresh_token)['access_token']
+# token=oauth.refresh_token(config.refresh_token)['access_token']
+token="I0.b2F1dGgyLmJkYy5zY2h3YWIuY29t.Wj1q_7aLK0JR9LJKyNRXGwtx2RM7o8_TjJFjE4qayR4@"
 
 print(token)
 accounts = Accounts.get_accounts(token)
@@ -29,7 +31,7 @@ for a in accounts:
     if a.account_number.endswith('549'):
         orders = a.open_orders(token)
         with open('stop_orders.csv', 'r') as f:
-            lines = [l for l in f.readlines() if l.strip()]
+            lines = [l.upper() for l in f.readlines() if l.strip()]
             for line in lines:
                 symbol, quantity, stop_price = line.strip().split(',')
                 o = [o['orderId'] for o in orders if o['orderLegCollection'][0]['instrument']['symbol'] == symbol and o['orderLegCollection'][0]['instruction'] == 'SELL']

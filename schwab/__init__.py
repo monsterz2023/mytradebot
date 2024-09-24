@@ -16,3 +16,4 @@ class Config:
         client_secret=os.environ.get("SCHWAB_CLIENT_SECRET")
         refresh_token=os.environ.get("SCHWAB_REFRESH_TOKEN")
         return cls(client_id,client_secret,refresh_token)
+    
